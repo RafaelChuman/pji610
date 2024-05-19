@@ -22,6 +22,7 @@ compiler = "3.2.0-alpha10"
 coil = "2.6.0"
 appcompatVersion = "1.7.0-rc01"
 listenablefuture = "9999.0-empty-to-avoid-conflict-with-guava"
+roomRuntime = "2.7.0-alpha02"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -45,6 +46,7 @@ compiler = { group = "com.android.databinding", name = "compiler", version.ref =
 coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompatVersion" }
 listenablefuture = { group = "com.google.guava", name = "listenablefuture", version.ref = "listenablefuture" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomRuntime" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

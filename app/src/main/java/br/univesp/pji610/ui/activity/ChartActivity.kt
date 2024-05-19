@@ -39,8 +39,8 @@ class ChartActivity : AppCompatActivity() {
 
 
         setBarChar()
-//        setPieChar()
-//        setRadarChar()
+        setPieChar()
+        setRadarChar()
     }
 
 
@@ -73,62 +73,62 @@ class ChartActivity : AppCompatActivity() {
     }
 
 
-//    private fun setRadarChar()
-//    {
-//
-//        radarChart = binding.chartActivityRadarChart
-//
-//        val list:ArrayList<RadarEntry> = ArrayList()
-//
-//        list.add(RadarEntry(100f,100f))
-//        list.add(RadarEntry(101f,101f))
-//        list.add(RadarEntry(102f,102f))
-//        list.add(RadarEntry(103f,103f))
-//        list.add(RadarEntry(104f,104f))
-//        list.add(RadarEntry(105f,105f))
-//
-//        var radarDataSet = RadarDataSet(list, "List")
-//
-//        radarDataSet.setColors(ColorTemplate.MATERIAL_COLORS, 255)
-//        radarDataSet.valueTextColor = Color.BLACK
-//        radarDataSet.valueTextSize = 14f
-//        radarDataSet.lineWidth = 2f
-//
-//        val pieData  = RadarData(radarDataSet)
-//
-//        radarChart.data = pieData
-//        radarChart.description.text = "Radar Chart"
-//
-//        radarChart.animateY(2000)
-//    }
-//
-//
-//        private fun setPieChar()
-//    {
-//
-//        pieChart = binding.chartActivityPieChart
-//
-//        val list:ArrayList<PieEntry> = ArrayList()
-//
-//        list.add(PieEntry(100f,100f))
-//        list.add(PieEntry(101f,101f))
-//        list.add(PieEntry(102f,102f))
-//        list.add(PieEntry(103f,103f))
-//        list.add(PieEntry(104f,104f))
-//        list.add(PieEntry(105f,105f))
-//
-//        var pieDataSet = PieDataSet(list, "List")
-//
-//        pieDataSet.setColors(ColorTemplate.MATERIAL_COLORS, 255)
-//        pieDataSet.valueTextColor = Color.BLACK
-//        pieDataSet.valueTextSize = 15f
-//
-//        val pieData  = PieData(pieDataSet)
-//
-//        pieChart.data = pieData
-//        pieChart.description.text = "Pie Chart"
-//        pieChart.centerText = "List"
-//
-//        pieChart.animateY(2000)
-//    }
+    private fun setRadarChar()
+    {
+
+        radarChart = binding.chartActivityRadarChart
+
+        val list:ArrayList<RadarEntry> = ArrayList()
+
+        list.add(RadarEntry(100f,100f))
+        list.add(RadarEntry(101f,101f))
+        list.add(RadarEntry(102f,102f))
+        list.add(RadarEntry(103f,103f))
+        list.add(RadarEntry(104f,104f))
+        list.add(RadarEntry(105f,105f))
+
+        var radarDataSet = RadarDataSet(list, "List")
+
+        radarDataSet.setColors(ColorTemplate.MATERIAL_COLORS, 255)
+        radarDataSet.valueTextColor = Color.BLACK
+        radarDataSet.valueTextSize = 14f
+        radarDataSet.lineWidth = 2f
+
+        val pieData  = RadarData(radarDataSet)
+
+        radarChart.data = pieData
+        radarChart.description.text = "Radar Chart"
+
+        radarChart.animateY(2000)
+    }
+
+
+        private fun setPieChar()
+    {
+
+        pieChart = binding.chartActivityPieChart
+
+        val list:ArrayList<PieEntry> = ArrayList()
+
+        list.add(PieEntry(100f,100f))
+        list.add(PieEntry(101f,101f))
+        list.add(PieEntry(102f,102f))
+        list.add(PieEntry(103f,103f))
+        list.add(PieEntry(104f,104f))
+        list.add(PieEntry(105f,105f))
+
+        var pieDataSet = PieDataSet(list, "List")
+
+        pieDataSet.setColors(ColorTemplate.MATERIAL_COLORS, 255)
+        pieDataSet.valueTextColor = Color.BLACK
+        pieDataSet.valueTextSize = 15f
+
+        val pieData  = PieData(pieDataSet)
+
+        pieChart.data = pieData
+        pieChart.description.text = "Pie Chart"
+        pieChart.centerText = "List"
+
+        pieChart.animateY(2000)
+    }
 }

@@ -16,7 +16,7 @@ import br.univesp.pji610.database.model.RescueGroup
 import br.univesp.pji610.database.model.User
 
 @Database(
-    version = 4,
+    version = 1,
     entities = [User::class, IoT::class, GroupIoT::class, RescueGroup::class, MonitorIoT::class],
     exportSchema = true
 )
@@ -41,7 +41,7 @@ abstract class DataSource : RoomDatabase() {
                 context,
                 DataSource::class.java,
                 "pji610.db"
-            ).build()
+            ).fallbackToDestructiveMigration().build()
         }
     }
 

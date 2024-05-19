@@ -39,9 +39,9 @@ class LoginActivity : AppCompatActivity() {
                     preferences[userPreferences] = user.id
                 }
 
-                RedirectTo(IoTActivity::class.java)
+                RedirectTo(ChartActivity::class.java)
 
-                //finish()
+                finish()
             } ?: ToastMessage("Falha na autenticação.")
         }
     }
@@ -56,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
 
     fun addUserOnClick(view: View) {
         binding.activityLoginButtonAddUser.setOnClickListener {
-            RedirectTo(ChartActivity::class.java)
+            RedirectTo(InsertUserActivity::class.java)
         }
     }
 }
