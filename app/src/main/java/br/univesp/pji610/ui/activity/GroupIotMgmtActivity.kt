@@ -10,7 +10,6 @@ import br.univesp.pji610.database.DataSource
 import br.univesp.pji610.database.model.GroupIoT
 import br.univesp.pji610.database.model.RescueGroup
 import br.univesp.pji610.databinding.ActivityGroupIotMgmtBinding
-import br.univesp.pji610.extensions.ToastMessage
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
@@ -79,10 +78,16 @@ class GroupIotMgmtActivity : AuthBaseActivity() {
                 ?.filterNotNull()
                 ?.collect { item ->
                     groupIotId = item.id
-                    binding.activityGroupIotMgmtEditTextName.setText(item.name)
-                    binding.activityGroupIotMgmtEditTextTemperature.setText(item.temperature.toString())
-                    binding.activityGroupIotMgmtEditTextHumidity.setText(item.humidity.toString())
-                    binding.activityGroupIotMgmtEditTextNoBreak.setText(item.noBreak.toString())
+                    val name = item.name
+                    val temperature = "${item.temperature}"
+                    val humidity = "${item.humidity} "
+                    val noBreak = "${item.noBreak}"
+
+                    binding.activityGroupIotMgmtEditTextName.setText(name)
+                    binding.activityGroupIotMgmtEditTextTemperature.setText(temperature)
+                    binding.activityGroupIotMgmtEditTextHumidity.setText(humidity)
+                    binding.activityGroupIotMgmtEditTextNoBreak.setText(noBreak)
+
                 }
         }
     }

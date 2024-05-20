@@ -33,6 +33,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/purple_500"
+                android:textFontWeight="@integer/material_motion_duration_medium_2"
                 tools:text="Name"/>
 
             <TextView

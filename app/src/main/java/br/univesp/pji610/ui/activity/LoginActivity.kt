@@ -39,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
                     preferences[userPreferences] = user.id
                 }
 
-                RedirectTo(ChartActivity::class.java)
+                RedirectTo(GroupIotActivity::class.java)
 
                 finish()
             } ?: ToastMessage("Falha na autenticação.")

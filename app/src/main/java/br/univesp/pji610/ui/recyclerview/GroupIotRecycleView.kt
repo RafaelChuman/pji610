@@ -32,16 +32,17 @@ class GroupIotRecycleView(
 
         fun associateItem(item: GroupIoT) {
             this.groupIoT = item
-            val name = binding.recyclerviewGroupIotTextViewName
-            val humidity = binding.recyclerviewGroupIotTextViewHumidity
-            val temperature = binding.recyclerviewGroupIotTextViewTemperature
-            val noBreak = binding.recyclerviewGroupIotTextViewNoBreak
+            val name = item.name
+            val humidity = "${item.humidity} %"
+            val temperature = "${item.temperature} ºC"
+            val noBreak = "${item.noBreak} min"
+
+            binding.recyclerviewGroupIotTextViewName.text = name
+            binding.recyclerviewGroupIotTextViewHumidity.text = humidity
+            binding.recyclerviewGroupIotTextViewTemperature.text = temperature
+            binding.recyclerviewGroupIotTextViewNoBreak.text = noBreak
 
 
-            name.text = item.name
-            humidity.text = item.humidity.toString()
-            temperature.text = item.temperature.toString()
-            noBreak.text = item.noBreak.toString()
         }
     }
 
