@@ -15,6 +15,7 @@ import java.util.UUID
             parentColumns = ["id"],
             childColumns = ["groupId"],
             onDelete = ForeignKey.CASCADE
+
         )
     ]
 )

@@ -9,15 +9,17 @@
         android:id="@+id/activity_group_iot_mgmt_toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/primaryColor"
+        android:background="@color/purple_700"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/group_iot_mgmt_menu"
+        app:menu="@menu/mgmt_menu"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="@string/newGroup" />
+        app:title="@string/group"
+        app:titleTextColor="@color/white"
+        />
 
     <ScrollView
         android:id="@+id/activity_group_iot_mgmt_scrollview"

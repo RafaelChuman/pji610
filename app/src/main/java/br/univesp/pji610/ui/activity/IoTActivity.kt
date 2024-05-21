@@ -1,89 +1,146 @@
 package br.univesp.pji610.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import br.univesp.pji610.database.DataSource
 import br.univesp.pji610.databinding.ActivityIotBinding
-import br.univesp.pji610.extensions.RedirectTo
 import br.univesp.pji610.ui.recyclerview.IoTRecycleView
 import kotlinx.coroutines.launch
 
-class IoTActivity : AuthBaseActivity() {
+class IoTActivity : Fragment() {
 
-    private val binding by lazy {
-        ActivityIotBinding.inflate(layoutInflater)
-    }
+    private lateinit var binding: ActivityIotBinding
 
     private val adapter by lazy {
-        IoTRecycleView(this)
+        IoTRecycleView(requireContext())
     }
 
     private val ioTDao by lazy {
-        DataSource.instance(this).iotTDAO()
+        DataSource.instance(requireContext()).iotTDAO()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = ActivityIotBinding.inflate(inflater, container, false)
 
         configRecyclerView()
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 getAllIoTOfUser("")
             }
         }
+
+        return binding.root
     }
 
-//
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.iot_menu, menu)
-//        return super.onCreateOptionsMenu(menu)
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id.iot_menu_logout -> {
-//                lifecycleScope.launch {
-//                    logout()
-//                }
-//            }
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.activityIotActivityFloatingButton.setOnClickListener {
+            setFab(it)
+        }
+    }
 
     private suspend fun getAllIoTOfUser(userId: String) {
-        ioTDao.getAll()
-            .collect { items ->
-                binding.activityIotActivityTextView.visibility =
-                    if (items.isEmpty()) {
-                        binding.activityIotActivityRecyclerView.visibility = GONE
-                        VISIBLE
-                    } else {
-                        binding.activityIotActivityRecyclerView.visibility = VISIBLE
-                        adapter.update(items)
-                        GONE
-                    }
-            }
-    }
-
-    fun setFab(view: View) {
-        RedirectTo(IotMgmtActivity::class.java)
+        ioTDao.getAll().collect { items ->
+            binding.activityIotActivityTextView.visibility =
+                if (items.isEmpty()) {
+                    binding.activityIotActivityRecyclerView.visibility = GONE
+                    VISIBLE
+                } else {
+                    binding.activityIotActivityRecyclerView.visibility = VISIBLE
+                    adapter.update(items)
+                    GONE
+                }
+        }
     }
 
     private fun configRecyclerView() {
         binding.activityIotActivityRecyclerView.adapter = adapter
         adapter.iotOnClickEvent = { iot ->
-            RedirectTo(IotMgmtActivity::class.java) {
-                putExtra(IOT_ID, iot.id)
-            }
+            val intent = Intent(requireActivity(), IotMgmtActivity::class.java)
+            intent.putExtra(IOT_ID, iot.id)
+            startActivity(intent)
         }
     }
 
+    fun setFab(view: View) {
+        val intent = Intent(requireActivity(), IotMgmtActivity::class.java)
+        startActivity(intent)
+    }
+
 }
+
+//    override fun onCreateView(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//
+//        setContentView(binding.root)
+//
+//        configRecyclerView()
+//
+//        lifecycleScope.launch {
+//            repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                getAllIoTOfUser("")
+//            }
+//        }
+//    }
+//
+//
+////    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+////        menuInflater.inflate(R.menu.iot_menu, menu)
+////        return super.onCreateOptionsMenu(menu)
+////    }
+////
+////    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+////        when (item.itemId) {
+////            R.id.iot_menu_logout -> {
+////                lifecycleScope.launch {
+////                    logout()
+////                }
+////            }
+////        }
+////        return super.onOptionsItemSelected(item)
+////    }
+//
+//    private suspend fun getAllIoTOfUser(userId: String) {
+//        ioTDao.getAll()
+//            .collect { items ->
+//                binding.activityIotActivityTextView.visibility =
+//                    if (items.isEmpty()) {
+//                        binding.activityIotActivityRecyclerView.visibility = GONE
+//                        VISIBLE
+//                    } else {
+//                        binding.activityIotActivityRecyclerView.visibility = VISIBLE
+//                        adapter.update(items)
+//                        GONE
+//                    }
+//            }
+//    }
+//
+//    fun setFab(view: View) {
+//        RedirectTo(IotMgmtActivity::class.java)
+//    }
+//
+//    private fun configRecyclerView() {
+//        binding.activityIotActivityRecyclerView.adapter = adapter
+//        adapter.iotOnClickEvent = { iot ->
+//            RedirectTo(IotMgmtActivity::class.java) {
+//                putExtra(IOT_ID, iot.id)
+//            }
+//        }
+//    }
+//
+//}

@@ -1,43 +1,56 @@
 package br.univesp.pji610.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import br.univesp.pji610.database.DataSource
 import br.univesp.pji610.databinding.ActivityGroupIotBinding
-import br.univesp.pji610.extensions.RedirectTo
 import br.univesp.pji610.ui.recyclerview.GroupIotRecycleView
 import kotlinx.coroutines.launch
 
-class GroupIotActivity : AuthBaseActivity() {
+class GroupIotActivity : Fragment() {
 
-    private val binding by lazy {
-        ActivityGroupIotBinding.inflate(layoutInflater)
-    }
+    private lateinit var binding: ActivityGroupIotBinding
 
     private val adapter by lazy {
-        GroupIotRecycleView(this)
+        GroupIotRecycleView(requireContext())
     }
 
     private val groupIoTDao by lazy {
-        DataSource.instance(this).groupIoTDAO()
+        DataSource.instance(requireContext()).groupIoTDAO()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = ActivityGroupIotBinding.inflate(inflater, container, false)
 
         configRecyclerView()
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 getAllGroupIoTOfUser("")
             }
+        }
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        binding.activityGroupIotFab.setOnClickListener {
+            setFab(it)
         }
     }
 
@@ -58,15 +71,16 @@ class GroupIotActivity : AuthBaseActivity() {
     }
 
     fun setFab(view: View) {
-        RedirectTo(GroupIotMgmtActivity::class.java)
+        val intent = Intent(requireActivity(), GroupIotMgmtActivity::class.java)
+        startActivity(intent)
     }
 
     private fun configRecyclerView() {
         binding.activityGroupIotRecyclerview.adapter = adapter
         adapter.groupIotOnClickEvent = { groupIot ->
-            RedirectTo(GroupIotMgmtActivity::class.java) {
-                putExtra(GROUP_IOT_ID, groupIot.id)
-            }
+            val intent = Intent(requireActivity(), GroupIotMgmtActivity::class.java)
+            intent.putExtra(GROUP_IOT_ID, groupIot.id)
+            startActivity(intent)
         }
     }
 }

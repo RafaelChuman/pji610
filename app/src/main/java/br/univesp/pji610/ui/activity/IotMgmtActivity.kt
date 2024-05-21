@@ -59,17 +59,17 @@ class IotMgmtActivity : AuthBaseActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.iot_mgmt_menu, menu)
+        menuInflater.inflate(R.menu.mgmt_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.iot_mgmt_menu_save -> {
+            R.id.mgmt_menu_save -> {
                 save()
             }
 
-            R.id.iot_mgmt_menu_remove -> {
+            R.id.mgmt_menu_remove -> {
                 remove()
             }
         }

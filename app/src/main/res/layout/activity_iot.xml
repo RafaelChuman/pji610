@@ -7,6 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.IoTActivity">
 
+
+
     <TextView
         android:id="@+id/activity_iot_activity_textView_"
         android:layout_width="wrap_content"
@@ -32,18 +34,14 @@
         tools:itemCount="10"
         tools:listitem="@layout/recyclerview_iot" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/activity_iot_activity_floatingButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:clickable="true"
-        android:contentDescription="@string/save"
-        android:focusable="true"
-        android:onClick="setFab"
-        android:text="@string/save"
+        android:text="@string/newIot"
+        app:icon="@drawable/ic_action_criacao"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_action_salvar" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

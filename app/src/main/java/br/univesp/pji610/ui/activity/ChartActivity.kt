@@ -4,10 +4,17 @@ import android.R
 import android.graphics.Color
 import android.os.Bundle
 import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import br.univesp.pji610.databinding.ActivityChartBinding
+import br.univesp.pji610.databinding.ActivityIotBinding
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.charts.PieChart
@@ -25,7 +32,7 @@ import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.coroutines.launch
 
 
-class ChartActivity : AppCompatActivity() {
+class ChartActivity : Fragment() {
     lateinit var barChart: BarChart
 
     lateinit var pieChart: PieChart
@@ -36,21 +43,30 @@ class ChartActivity : AppCompatActivity() {
     val purple_200 = 0xFFBB86FC
     val purple_500 = 0xFF6200EE
 
-    private val binding by lazy {
-        ActivityChartBinding.inflate(layoutInflater)
+    private lateinit var binding: ActivityChartBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = ActivityChartBinding.inflate(inflater, container, false)
+
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                setBarChar()
+                setPieChar()
+                setLineChar()
+            }
+        }
+
+        return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        setContentView(binding.root)
-
-
-        lifecycleScope.launch {
-            setBarChar()
-            setPieChar()
-            setLineChar()
-        }
 
     }
 

@@ -15,6 +15,8 @@
     <string name="description">Descrição</string>
 
     <string name="iot">IoT</string>
+    <string name="newIot">Novo IoT</string>
+
     <string name="group">Grupo</string>
     <string name="newGroup">Novo Grupo</string>
 
@@ -38,5 +40,10 @@
     <string name="temperature">Temperatura</string>
     <string name="humidity">Humidade</string>
     <string name="noBreak">NoBreak</string>
+
+    <string name="openNav">Abrir</string>
+    <string name="closeNav">Fechar</string>
+
+
 
 </resources>
