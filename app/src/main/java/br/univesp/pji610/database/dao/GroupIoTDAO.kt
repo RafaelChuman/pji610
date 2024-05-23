@@ -33,6 +33,6 @@ interface GroupIoTDAO {
     @Query(""" SELECT * FROM GroupIoT WHERE id = :groupIotId""")
     fun getById(
         groupIotId: String,
-    ): Flow<GroupIoT>?
+    ): Flow<GroupIoT?>?
 
 }

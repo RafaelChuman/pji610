@@ -14,16 +14,19 @@ interface IoTDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun save(iot: IoT)
 
+    //WHERE RescueGroup.userID = :userId
+    //userId: String,
+    //INNER JOIN RescueGroup ON RescueGroup.groupId = GroupIoT.id
     @Query(
         """
         SELECT * 
         FROM IoT 
         INNER JOIN GroupIoT ON GroupIoT.id = IoT.groupId
-        INNER JOIN RescueGroup ON RescueGroup.groupId = GroupIoT.id
-        WHERE RescueGroup.userID = :userId"""
+        
+        """
     )
     fun getAllByUser(
-        userId: String,
+
     ): Flow<List<IoT_GroupIoT>>
 
     @Query(
@@ -34,7 +37,7 @@ interface IoTDAO {
     )
     fun getById(
         iotId: String,
-    ): Flow<IoT>?
+    ): Flow<IoT?>?
 
     @Query("DELETE FROM IoT WHERE id = :id")
     suspend fun remove(id: String)

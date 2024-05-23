@@ -6,22 +6,23 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.univesp.pji610.database.model.IoT
+import br.univesp.pji610.database.model.IoT_GroupIoT
 import br.univesp.pji610.databinding.RecyclerviewIotBinding
 
 class IoTRecycleView(
     private val context: Context,
-    var iotOnClickEvent: (ioT: IoT) -> Unit = {},
-    ioTs: List<IoT> = emptyList()
+    var iotOnClickEvent: (ioT: IoT_GroupIoT) -> Unit = {},
+    ioTs: List<IoT_GroupIoT> = emptyList()
 ) : RecyclerView.Adapter<IoTRecycleView.ViewHolder>() {
 
     private val ioTs = ioTs.toMutableList()
 
     inner class ViewHolder(
         private val binding: RecyclerviewIotBinding,
-        private val iotOnClickEvent: (ioT: IoT) -> Unit
+        private val iotOnClickEvent: (ioT: IoT_GroupIoT) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        private lateinit var iot: IoT
+        private lateinit var iot: IoT_GroupIoT
 
         init {
             itemView.setOnClickListener {
@@ -31,7 +32,7 @@ class IoTRecycleView(
             }
         }
 
-        fun associateItem(item: IoT) {
+        fun associateItem(item: IoT_GroupIoT) {
             Log.i("getAllIoTOfUser", "associateItem(): $item")
             this.iot = item
             val name = binding.recyclerviewIotItemsTextViewName
@@ -40,11 +41,11 @@ class IoTRecycleView(
             val noBreak = binding.recyclerviewIotItemsTextViewGroupNoBreak
             val temperature = binding.recyclerviewIotItemsTextViewGroupTemperature
 
-            name.text = item.name
-            groupName.text = item.groupId
-            temperature.text =  item.name
-            humidity.text =  item.name
-            noBreak.text =  item.name
+            name.text = item.ioT.name
+            groupName.text = item.groupIoT.name
+            temperature.text =  item.groupIoT.temperature.toString()
+            humidity.text =  item.groupIoT.humidity.toString()
+            noBreak.text =  item.groupIoT.noBreak.toString()
 
         }
     }
@@ -68,7 +69,7 @@ class IoTRecycleView(
 
     override fun getItemCount(): Int = ioTs.size
 
-    fun update(newItems: List<IoT>) {
+    fun update(newItems: List<IoT_GroupIoT>) {
         notifyItemRangeRemoved(0, this.ioTs.size)
         this.ioTs.clear()
         this.ioTs.addAll(newItems)

@@ -173,7 +173,7 @@ class ChartActivity : Fragment() {
 
         pieChart.data = pieData
         pieChart.description.text = ""
-        pieChart.centerText = "Humidade"
+        pieChart.centerText = "Umidade"
         pieChart.legend.isEnabled = false
         pieChart.setDrawEntryLabels(false);
         pieChart.setContentDescription("");

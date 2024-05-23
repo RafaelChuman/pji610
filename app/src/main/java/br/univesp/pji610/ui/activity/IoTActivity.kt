@@ -2,6 +2,7 @@ package br.univesp.pji610.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -55,7 +56,9 @@ class IoTActivity : Fragment() {
     }
 
     private suspend fun getAllIoTOfUser(userId: String) {
-        ioTDao.getAll().collect { items ->
+        ioTDao.getAllByUser().collect { items ->
+
+            Log.i("getAllIoTOfUser","${items}")
             binding.activityIotActivityTextView.visibility =
                 if (items.isEmpty()) {
                     binding.activityIotActivityRecyclerView.visibility = GONE
@@ -72,7 +75,7 @@ class IoTActivity : Fragment() {
         binding.activityIotActivityRecyclerView.adapter = adapter
         adapter.iotOnClickEvent = { iot ->
             val intent = Intent(requireActivity(), IotMgmtActivity::class.java)
-            intent.putExtra(IOT_ID, iot.id)
+            intent.putExtra(IOT_ID, iot.ioT.id)
             startActivity(intent)
         }
     }
